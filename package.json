@@ -1,6 +1,6 @@
 {
   "name": "create-create",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "dependencies": {
     "creed": "^1.2.1",
     "cross-spawn": "^5.1.0",
