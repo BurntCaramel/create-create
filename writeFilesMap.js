@@ -3,15 +3,26 @@ const FS = require('fs-extra')
 
 function writeFilesMap(baseDir, filesMap) {
 	let promises = []
-	filesMap.forEach((contents, fileNameOrArray) => {
-		const fileName = Path.join.apply(Path, [].concat(fileNameOrArray))
-		promises.push(
-			typeof contents === 'string' ? (
-				FS.outputFile(Path.join(baseDir, fileName), contents)
-			) : (
-				FS.outputJSON(Path.join(baseDir, fileName), contents)
+	filesMap.forEach((info, fileNameOrArray) => {
+		const filePath = Path.join.apply(Path, [baseDir].concat(fileNameOrArray))
+		// Contents: JSON
+		if (info.json) {
+			promises.push(
+				FS.outputJSON(filePath, info.json)
 			)
-		)
+		}
+		// Contents: Text
+		if (info.text) {
+			promises.push(
+				FS.outputFile(filePath, info.text)
+			)
+		}
+		// Mode
+		if (info.mode) {
+			promises.push(
+				FS.chmod(filePath, info.mode)
+			)
+		}
 	})
 	return Promise.all(promises)
 }
