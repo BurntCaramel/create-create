@@ -8,7 +8,7 @@ function run({
 	makeMessage,
 	useYarnIfAvailable = filesMap.has('package.json')
 } = {}) {
-	const useYarn = useYarnIfAvailable ? checkYarnAvailable() : undefined
+	const useYarn = useYarnIfAvailable ? checkYarnAvailable() : undefined;
 	(!!filesMap ? writeFilesMap(baseDir, filesMap) : Promise.resolve(true))
 		.then(() => (
 			!!devDependencies &&
