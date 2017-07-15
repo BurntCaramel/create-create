@@ -1,6 +1,9 @@
 {
   "name": "create-create",
-  "version": "0.1.2",
+  "version": "0.1.3",
+  "bin": {
+    "create-create": "./bin/create-create.js"
+  },
   "dependencies": {
     "creed": "^1.2.1",
     "cross-spawn": "^5.1.0",
