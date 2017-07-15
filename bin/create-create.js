@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+const Path = require('path')
+
 const run = require('../run')
 
 require('yargs')
