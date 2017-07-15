@@ -1,12 +1,12 @@
 const Path = require('path')
-const FS = require('fs')
+const FS = require('fs-extra')
 const Spawn = require('cross-spawn')
 const { resolve, coroutine, runNode } = require('creed')
 
 const accessibleFile = (path) => runNode(FS.access, path).map(() => path).catch(() => null)
 
 const installPackages = coroutine(function * installPackage(projectPath, packageNames, { dev = false, useYarn = false } = {}) {
-	const appPackage = require(Path.join(projectPath, 'package.json'))
+	const appPackage = yield FS.readJSON(Path.join(projectPath, 'package.json'))
 	const dependencies = (dev ? appPackage.devDependencies : appPackage.dependencies) || {}
 	const needInstalling = packageNames.filter(packageName => !dependencies[packageName])
 	if (needInstalling.length === 0) {
