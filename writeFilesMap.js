@@ -26,3 +26,5 @@ function writeFilesMap(baseDir, filesMap) {
 	})
 	return Promise.all(promises)
 }
+
+module.exports = writeFilesMap
